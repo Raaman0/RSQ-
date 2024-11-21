@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relationship Scale Questionnaire (RSQ)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .instructions {
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Relationship Scale Questionnaire (RSQ)</h1>
+  <p class="instructions">Rate yourself on a scale of 1-5 for each statement that best describes your stance:</p>
+  <form id="rsq-form">
+    <!-- Questions 1-22 -->
+    <div class="question"><label>1. I find it difficult to depend on others.</label><br><input type="number" name="q1" min="1" max="5" required></div>
+    <div class="question"><label>2. I worry that I will be hurt if I allow myself to become too close to others.</label><br><input type="number" name="q2" min="1" max="5" required></div>
+    <div class="question"><label>3. I am comfortable without close emotional relationships.</label><br><input type="number" name="q3" min="1" max="5" required></div>
+    <div class="question"><label>4. I am not sure that I can always depend on others to be there when I need them.</label><br><input type="number" name="q4" min="1" max="5" required></div>
+    <div class="question"><label>5. I worry about being alone.</label><br><input type="number" name="q5" min="1" max="5" required></div>
+    <div class="question"><label>6. I often worry that romantic partners don’t really love me and won’t want to stay with me.</label><br><input type="number" name="q6" min="1" max="5" required></div>
+    <div class="question"><label>7. I find it difficult to trust others completely.</label><br><input type="number" name="q7" min="1" max="5" required></div>
+    <div class="question"><label>8. I worry about others getting too close to me.</label><br><input type="number" name="q8" min="1" max="5" required></div>
+    <div class="question"><label>9. I worry that others don’t value me as much as I value them.</label><br><input type="number" name="q9" min="1" max="5" required></div>
+    <div class="question"><label>10. People are never there when you need them.</label><br><input type="number" name="q10" min="1" max="5" required></div>
+    <div class="question"><label>11. My desire to merge completely sometimes scares people away.</label><br><input type="number" name="q11" min="1" max="5" required></div>
+    <div class="question"><label>12. I am nervous when anyone gets too close to me.</label><br><input type="number" name="q12" min="1" max="5" required></div>
+    <div class="question"><label>13. I worry about being abandoned.</label><br><input type="number" name="q13" min="1" max="5" required></div>
+    <div class="question"><label>14. I find it easy to form meaningful emotional relationships.</label><br><input type="number" name="q14" min="1" max="5" required></div>
+    <div class="question"><label>15. I worry that people will eventually leave me.</label><br><input type="number" name="q15" min="1" max="5" required></div>
+    <div class="question"><label>16. I am uncomfortable relying on others for support.</label><br><input type="number" name="q16" min="1" max="5" required></div>
+    <div class="question"><label>17. I worry that I am not good enough for others.</label><br><input type="number" name="q17" min="1" max="5" required></div>
+    <div class="question"><label>18. I avoid getting too close to others.</label><br><input type="number" name="q18" min="1" max="5" required></div>
+    <div class="question"><label>19. I feel that others are often untrustworthy.</label><br><input type="number" name="q19" min="1" max="5" required></div>
+    <div class="question"><label>20. I prefer to be independent rather than rely on others.</label><br><input type="number" name="q20" min="1" max="5" required></div>
+    <div class="question"><label>21. I often feel rejected even when others don’t intend it.</label><br><input type="number" name="q21" min="1" max="5" required></div>
+    <div class="question"><label>22. I often feel insecure in relationships.</label><br><input type="number" name="q22" min="1" max="5" required></div>
+
+    <button type="button" onclick="calculateResult()">Submit</button>
+  </form>
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculateResult() {
+      const form = document.getElementById('rsq-form');
+      const formData = new FormData(form);
+      let totalScore = 0;
+
+      for (let value of formData.values()) {
+        totalScore += parseInt(value, 10);
+      }
+
+      let resultText = `Your total score is: ${totalScore}. `;
+
+      // Relationship Type Classification
+      if (totalScore >= 22 && totalScore <= 55) {
+        resultText += "Your attachment type is: *Secure*. You are likely to have healthy relationships.";
+      } else if (totalScore >= 56 && totalScore <= 80) {
+        resultText += "Your attachment type is: *Dismissive*. You may prefer emotional independence and struggle with trust.";
+      } else if (totalScore >= 81 && totalScore <= 105) {
+        resultText += "Your attachment type is: *Anxious*. You might have concerns about rejection or being unloved.";
+      } else if (totalScore > 105) {
+        resultText += "Your attachment type is: *Fearful*. You may have significant trust and intimacy issues.";
+      }
+
+      document.getElementById('result').innerHTML = resultText;
+    }
+  </script>
+</body>
+</html>
